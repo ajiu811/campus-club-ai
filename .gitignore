@@ -1,0 +1,24 @@
+# 密钥与令牌 —— 绝对不能提交
+server/token.json
+.env
+.env.local
+.env.*.local
+
+# 调试截图与临时文件
+_rec_*.png
+_me_entry.png
+.tmp*
+*.log
+
+# 工具本地数据（工作区记忆、会话缓存等）
+.workbuddy/
+.vercel/
+
+# 部署产物
+node_modules/
+dist/
+
+# 操作系统
+.DS_Store
+Thumbs.db
+desktop.ini
