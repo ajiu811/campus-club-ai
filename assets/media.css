@@ -1,0 +1,44 @@
+/* ==========================================================================
+   团团 · 图片 / 素材槽位注册表  media.css v1.0
+   --------------------------------------------------------------------------
+   这是「后面要换接入图片」的唯一改动点。
+   模块里禁止写死图片路径，一律用 var(--img-xxx) 引用本文件的槽位。
+
+   换图两种方式（任选其一，都不用改模块 HTML）：
+     A. 直接替换 assets/img/ 下的同名文件（推荐，零改动）
+        例：把真实 Banner 另存为 assets/img/banner-1.jpg 不行——
+            需保持扩展名一致，或改成本文件里对应的那一行路径。
+     B. 改本文件里对应那一行的值，指向新文件
+        例：把 --img-banner-1 的值换成 ./img/banner-real.jpg（并把图片放进 assets/img/）
+
+   约定：所有图片以 CSS 背景图方式使用（.tt-media + background-image:var(--img-xxx)），
+        不要在模块里用 <img src="..."> 写死路径。
+   建议尺寸与比例见 ASSETS.md。
+   ========================================================================== */
+
+:root{
+  /* 校徽 / 品牌标 */
+  --img-logo:           url("./img/logo.svg");
+
+  /* Banner 轮播（3 张） */
+  --img-banner-1:       url("./img/banner-1.svg");
+  --img-banner-2:       url("./img/banner-2.svg");
+  --img-banner-3:       url("./img/banner-3.svg");
+
+  /* 社团封面（对应推荐社团 4 列卡片） */
+  --img-club-1:         url("./img/club-1.svg");
+  --img-club-2:         url("./img/club-2.svg");
+  --img-club-3:         url("./img/club-3.svg");
+  --img-club-4:         url("./img/club-4.svg");
+
+  /* 活动缩略图（暂复用社团封面，可另建文件后改这三行） */
+  --img-activity-1:     url("./img/club-2.svg");
+  --img-activity-2:     url("./img/club-3.svg");
+  --img-activity-3:     url("./img/club-4.svg");
+
+  /* 头像占位 */
+  --img-avatar:         url("./img/avatar-default.svg");
+
+  /* 通用占位（空状态 / 未接入图片时） */
+  --img-placeholder:    url("./img/placeholder.svg");
+}

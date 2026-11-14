@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>团团 · 设计规范 Style Guide v1.0</title>
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/media.css">
+<style>
+  .sg-wrap{max-width:var(--wrap-w);margin:0 auto;padding:var(--sp-8) var(--wrap-pad) 80px;position:relative;z-index:1}
+  .sg-head{display:flex;align-items:center;gap:var(--sp-4);padding-bottom:var(--sp-6);border-bottom:1px solid var(--line);margin-bottom:var(--sp-8)}
+  .sg-logo{width:46px;height:46px;border-radius:var(--r-md);background:var(--brand-grad);background-image:var(--img-logo);background-size:cover;box-shadow:0 4px 14px rgba(47,107,255,.25);flex-shrink:0}
+  .sg-head h1{font-size:var(--fs-h1);font-weight:700}
+  .sg-head p{font-size:var(--fs-sm);color:var(--muted);margin-top:var(--sp-1)}
+  .sg-tag{margin-left:auto;font-size:var(--fs-sm);color:var(--brand);background:var(--brand-soft);padding:5px var(--sp-3);border-radius:var(--r-pill);font-weight:600}
+  .sg-sec{margin-bottom:var(--sp-8)}
+  .sg-sec > h2{font-size:var(--fs-h2);font-weight:700;display:flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-1)}
+  .sg-sec > h2::before{content:"";width:3px;height:17px;border-radius:3px;background:var(--brand)}
+  .sg-sec > p.sg-desc{font-size:var(--fs-sm);color:var(--muted);margin-bottom:var(--sp-4)}
+  .sg-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:var(--sp-5)}
+  .sg-swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--sp-3)}
+  .sg-sw{border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden}
+  .sg-sw i{display:block;height:56px}
+  .sg-sw div{padding:var(--sp-2) 10px;font-size:var(--fs-xs);line-height:1.6}
+  .sg-sw b{display:block;font-size:var(--fs-sm);color:var(--ink);font-weight:600}
+  .sg-sw span{color:var(--muted)}
+  .sg-cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap-grid)}
+  .sg-cat{height:var(--cat-h);border-radius:var(--r-lg);display:flex;align-items:center;gap:var(--sp-3);padding:0 var(--sp-5)}
+  .sg-cat i{width:34px;height:34px;border-radius:10px;background:currentColor;opacity:.16;flex-shrink:0}
+  .sg-cat b{font-size:var(--fs-h3);font-weight:700}
+  .sg-cat small{display:block;font-size:var(--fs-xs);opacity:.75;font-weight:500}
+  .sg-types{display:flex;flex-direction:column;gap:var(--sp-3)}
+  .sg-types div{display:flex;align-items:baseline;gap:var(--sp-4);border-bottom:1px dashed var(--line-soft);padding-bottom:var(--sp-2)}
+  .sg-types code{font-size:var(--fs-xs);color:var(--brand);background:var(--brand-soft);padding:2px 8px;border-radius:var(--r-xs);min-width:96px}
+  .sg-shapes{display:flex;flex-wrap:wrap;gap:var(--sp-4);align-items:flex-end}
+  .sg-shape{width:110px;height:76px;background:var(--brand-soft);border:1px solid var(--brand-border);display:grid;place-items:center;font-size:var(--fs-xs);color:var(--brand);font-weight:600}
+  .sg-shadow{width:150px;height:76px;background:var(--card);display:grid;place-items:center;font-size:var(--fs-xs);color:var(--muted)}
+  .sg-comps{display:flex;flex-wrap:wrap;gap:var(--sp-3);align-items:center}
+  .sg-search{width:280px}
+  .sg-mini-card{width:190px;padding:var(--sp-3);border-radius:var(--r-md)}
+  .sg-mini-card b{display:block;font-size:var(--fs-lg);margin-bottom:var(--sp-1)}
+  .sg-mini-card span{font-size:var(--fs-sm);color:var(--muted)}
+  .sg-media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:var(--sp-4)}
+  .sg-media{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--card)}
+  .sg-media .pic{height:110px;background-size:cover;background-position:center}
+  .sg-media .pic.tall{height:90px}
+  .sg-media .pic.small{height:70px;background-size:64px 64px;background-repeat:no-repeat;background-position:center;background-color:var(--card-soft)}
+  .sg-media div.cap{padding:var(--sp-2) var(--sp-3);font-size:var(--fs-xs);color:var(--ink-2);line-height:1.7}
+  .sg-media div.cap b{display:block;color:var(--ink);font-size:var(--fs-sm)}
+  .sg-media div.cap span{color:var(--muted)}
+  .sg-table{width:100%;border-collapse:collapse;font-size:var(--fs-sm)}
+  .sg-table th,.sg-table td{text-align:left;padding:9px var(--sp-3);border-bottom:1px solid var(--line-soft)}
+  .sg-table th{color:var(--muted);font-weight:600;font-size:var(--fs-xs)}
+  .sg-table td code{font-size:var(--fs-xs);color:var(--brand);background:var(--brand-soft);padding:2px 7px;border-radius:var(--r-xs)}
+  .sg-foot{margin-top:var(--sp-8);padding:var(--sp-5);background:var(--card-soft);border:1px dashed var(--brand-border);border-radius:var(--r-lg);font-size:var(--fs-sm);color:var(--ink-2);line-height:1.9}
+  .sg-foot b{color:var(--brand)}
+  @media (max-width:768px){.sg-cats{grid-template-columns:repeat(2,minmax(0,1fr))}.sg-wrap{padding:var(--sp-5) var(--sp-3)}}
+</style>
+</head>
+<body>
+<div class="sg-wrap">
+
+  <div class="sg-head">
+    <div class="sg-logo"></div>
+    <div>
+      <h1>团团 · 设计规范</h1>
+      <p>Style Guide v1.0 · 基准：社团广场设计稿 + index.html（v1 参考实现）</p>
+    </div>
+    <span class="sg-tag">唯一变量源 · tokens.css</span>
+  </div>
+
+  <section class="sg-sec">
+    <h2>01 · 品牌与中性色</h2>
+    <p class="sg-desc">全部来自 <code>assets/tokens.css</code>。改风格只需改变量值，本页刷新即可验收。</p>
+    <div class="sg-card">
+      <div class="sg-swatches">
+        <div class="sg-sw"><i style="background:var(--brand)"></i><div><b>品牌主色</b><span>--brand · #2f6bff</span></div></div>
+        <div class="sg-sw"><i style="background:var(--brand-deep)"></i><div><b>主色加深</b><span>--brand-deep</span></div></div>
+        <div class="sg-sw"><i style="background:var(--brand-soft)"></i><div><b>主色浅底</b><span>--brand-soft</span></div></div>
+        <div class="sg-sw"><i style="background:var(--ink)"></i><div><b>主文字</b><span>--ink</span></div></div>
+        <div class="sg-sw"><i style="background:var(--ink-2)"></i><div><b>次文字</b><span>--ink-2</span></div></div>
+        <div class="sg-sw"><i style="background:var(--muted)"></i><div><b>辅助文字</b><span>--muted</span></div></div>
+        <div class="sg-sw"><i style="background:var(--bg)"></i><div><b>页面底</b><span>--bg</span></div></div>
+        <div class="sg-sw"><i style="background:var(--card);border-bottom:1px solid var(--line)"></i><div><b>卡片 / 描边</b><span>--card · --line</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sg-sec">
+    <h2>02 · 六大分类配色</h2>
+    <p class="sg-desc">顺序固定，不得调换；背景与图标色成对使用。</p>
+    <div class="sg-cats">
+      <div class="sg-cat" style="background:var(--cat-1-bg);color:var(--cat-1-fg)"><i></i><div><b>思想政治类</b><small>--cat-1-bg / --cat-1-fg</small></div></div>
+      <div class="sg-cat" style="background:var(--cat-2-bg);color:var(--cat-2-fg)"><i></i><div><b>学术科技类</b><small>--cat-2-bg / --cat-2-fg</small></div></div>
+      <div class="sg-cat" style="background:var(--cat-3-bg);color:var(--cat-3-fg)"><i></i><div><b>自律互助类</b><small>--cat-3-bg / --cat-3-fg</small></div></div>
+      <div class="sg-cat" style="background:var(--cat-4-bg);color:var(--cat-4-fg)"><i></i><div><b>创新创业类</b><small>--cat-4-bg / --cat-4-fg</small></div></div>
+      <div class="sg-cat" style="background:var(--cat-5-bg);color:var(--cat-5-fg)"><i></i><div><b>文化体育类</b><small>--cat-5-bg / --cat-5-fg</small></div></div>
+      <div class="sg-cat" style="background:var(--cat-6-bg);color:var(--cat-6-fg)"><i></i><div><b>志愿公益类</b><small>--cat-6-bg / --cat-6-fg</small></div></div>
+    </div>
+  </section>
+
+  <section class="sg-sec">
+    <h2>03 · 字体层级</h2>
+    <p class="sg-desc">系统字体栈，禁止外链 CDN 字体；手写体仅用于 Banner 标语。</p>
+    <div class="sg-card sg-types">
+      <div><code>--fs-h1 / 23</code><span style="font-size:var(--fs-h1);font-weight:700">页面主标题</span></div>
+      <div><code>--fs-h2 / 17</code><span style="font-size:var(--fs-h2);font-weight:700">区块标题 · 推荐社团</span></div>
+      <div><code>--fs-h3 / 16</code><span style="font-size:var(--fs-h3);font-weight:700">分类名称</span></div>
+      <div><code>--fs-lg / 15</code><span style="font-size:var(--fs-lg);font-weight:700">卡片标题</span></div>
+      <div><code>--fs-base / 14</code><span style="font-size:var(--fs-base)">正文基准文字</span></div>
+      <div><code>--fs-sm / 12.5</code><span style="font-size:var(--fs-sm);color:var(--muted)">辅助说明 · 关注数 · 时间戳</span></div>
+      <div><code>--font-hand</code><span style="font-family:var(--font-hand);font-size:22px;font-weight:700;color:var(--brand)">加入热爱的社团</span></div>
+    </div>
+  </section>
+
+  <section class="sg-sec">
+    <h2>04 · 圆角与阴影</h2>
+    <p class="sg-desc">圆角偏大、阴影很轻；hover 只做上浮 + 阴影加深。</p>
+    <div class="sg-card sg-shapes">
+      <div class="sg-shape" style="border-radius:var(--r-xs)">r-xs 8</div>
+      <div class="sg-shape" style="border-radius:var(--r-sm)">r-sm 11</div>
+      <div class="sg-shape" style="border-radius:var(--r-md)">r-md 14</div>
+      <div class="sg-shape" style="border-radius:var(--r-lg)">r-lg 16</div>
+      <div class="sg-shape" style="border-radius:var(--r-xl)">r-xl 18</div>
+      <div class="sg-shape" style="border-radius:var(--r-pill)">r-pill 胶囊</div>
+      <div class="sg-shadow" style="border-radius:var(--r-md);box-shadow:var(--shadow)">--shadow</div>
+      <div class="sg-shadow" style="border-radius:var(--r-md);box-shadow:var(--shadow-hover)">--shadow-hover</div>
+      <div class="sg-shadow" style="border-radius:var(--r-md);box-shadow:var(--shadow-lg)">--shadow-lg</div>
+    </div>
+  </section>
+
+  <section class="sg-sec">
+    <h2>05 · 通用组件</h2>
+    <p class="sg-desc">来自 <code>assets/base.css</code>，模块任务直接复用，不要自己再造一套。</p>
+    <div class="sg-card">
+      <div class="sg-comps" style="margin-bottom:var(--sp-4)">
+        <button class="tt-btn">主按钮</button>
+        <button class="tt-btn tt-btn-ghost">次按钮</button>
+        <span class="tt-pill">+ 关注</span>
+        <span class="tt-pill tt-pill-done">已关注</span>
+        <span class="tt-tag">标签</span>
+        <span class="tt-tag tt-tag-ok">进行中</span>
+        <span class="tt-tag tt-tag-warn">待办</span>
+      </div>
+      <div class="sg-comps" style="margin-bottom:var(--sp-4)">
+        <label class="tt-search sg-search"><span style="color:var(--muted)">⌕</span><input placeholder="搜索社团、活动、关键词..."></label>
+        <div class="tt-card tt-card-hover sg-mini-card"><b>社团卡片</b><span class="tt-clamp-2">白底、大圆角、轻阴影，hover 微微上浮，封面用图片槽位。</span></div>
+      </div>
+      <div class="tt-section-head"><h2>推荐社团</h2><a class="tt-more" href="#">查看更多 ›</a></div>
+      <div class="tt-empty">还没有关注的社团，去逛逛吧（空状态示例）</div>
+    </div>
+  </section>
+
+  <section class="sg-sec">
+    <h2>06 · 图片槽位预览</h2>
+    <p class="sg-desc">这些是 <code>assets/img/</code> 里的占位图。换真实图片：覆盖同名文件，或改 <code>assets/media.css</code> 对应一行 —— 模块 HTML 一个字都不用动。</p>
+    <div class="sg-card">
+      <div class="sg-media-grid">
+        <div class="sg-media"><div class="pic" style="background-image:var(--img-banner-1)"></div><div class="cap"><b>--img-banner-1</b><span>首页 Banner ① · 1200×210</span></div></div>
+        <div class="sg-media"><div class="pic" style="background-image:var(--img-banner-2)"></div><div class="cap"><b>--img-banner-2</b><span>首页 Banner ② · 1200×210</span></div></div>
+        <div class="sg-media"><div class="pic" style="background-image:var(--img-banner-3)"></div><div class="cap"><b>--img-banner-3</b><span>首页 Banner ③ · 1200×210</span></div></div>
+        <div class="sg-media"><div class="pic tall" style="background-image:var(--img-club-1)"></div><div class="cap"><b>--img-club-1</b><span>社团封面 ① · 400×150</span></div></div>
+        <div class="sg-media"><div class="pic tall" style="background-image:var(--img-club-2)"></div><div class="cap"><b>--img-club-2</b><span>社团封面 ② · 400×150</span></div></div>
+        <div class="sg-media"><div class="pic tall" style="background-image:var(--img-club-3)"></div><div class="cap"><b>--img-club-3</b><span>社团封面 ③ · 400×150</span></div></div>
+        <div class="sg-media"><div class="pic tall" style="background-image:var(--img-club-4)"></div><div class="cap"><b>--img-club-4</b><span>社团封面 ④ · 400×150</span></div></div>
+        <div class="sg-media"><div class="pic tall" style="background-image:var(--img-activity-1)"></div><div class="cap"><b>--img-activity-1</b><span>活动缩略图 ① · 暂复用 club-2</span></div></div>
+        <div class="sg-media"><div class="pic small" style="background-image:var(--img-logo)"></div><div class="cap"><b>--img-logo</b><span>校徽 / 品牌标 · 64×64</span></div></div>
+        <div class="sg-media"><div class="pic small" style="background-image:var(--img-avatar)"></div><div class="cap"><b>--img-avatar</b><span>默认头像 · 64×64</span></div></div>
+        <div class="sg-media"><div class="pic tall" style="background-image:var(--img-placeholder)"></div><div class="cap"><b>--img-placeholder</b><span>通用空图 · 400×240</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sg-sec">
+    <h2>07 · 并行模块槽位</h2>
+    <p class="sg-desc">每个任务独占一个前缀，拼装时不会串样式。完整契约见 <code>MODULES.md</code>，提示词见 <code>TASKS.md</code>。</p>
+    <div class="sg-card">
+      <table class="sg-table">
+        <tr><th>任务</th><th>界面</th><th>类名前缀</th><th>根节点 id</th><th>输出文件</th></tr>
+        <tr><td>01</td><td>吸顶导航</td><td><code>tt-nav-</code></td><td><code>#tt-nav</code></td><td>sections/01-nav.html/.css</td></tr>
+        <tr><td>02</td><td>搜索 + Banner</td><td><code>tt-hero-</code></td><td><code>#tt-hero</code></td><td>sections/02-hero.html/.css</td></tr>
+        <tr><td>03</td><td>六大分类</td><td><code>tt-cat-</code></td><td><code>#tt-cats</code></td><td>sections/03-cats.html/.css</td></tr>
+        <tr><td>04</td><td>推荐社团</td><td><code>tt-club-</code></td><td><code>#tt-clubs</code></td><td>sections/04-clubs.html/.css</td></tr>
+        <tr><td>05</td><td>社团活动页</td><td><code>tt-ev-</code></td><td><code>#tt-events</code></td><td>sections/05-events.html/.css</td></tr>
+        <tr><td>06</td><td>个人中心页</td><td><code>tt-me-</code></td><td><code>#tt-profile</code></td><td>sections/06-profile.html/.css</td></tr>
+        <tr><td>07</td><td>AI 助手「团团」</td><td><code>tt-ai-</code></td><td><code>#tt-assistant</code></td><td>sections/07-assistant.html/.css</td></tr>
+        <tr><td>99</td><td>拼装</td><td>—</td><td>—</td><td>app.html</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <div class="sg-foot">
+    <b>改完怎么验收？</b> 改 <code>assets/tokens.css</code>（整体风格）或 <code>assets/media.css</code>（图片）后，直接刷新本页即可看到变化，不需要重新生成任何模块、也不需要新建会话。<br>
+    若把规范也写进了项目指令 / <code>.codebuddy/rules</code>，那些文字改动必须新建任务才生效。规范变更记得在 <code>DESIGN.md</code> 的变更记录留一行。<br>
+    本页是规范层文档，不参与拼装；<code>index.html</code> 是 v1 参考实现，只读。
+  </div>
+
+</div>
+</body>
+</html>

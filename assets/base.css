@@ -1,0 +1,158 @@
+/* ==========================================================================
+   团团 · 全局基础样式  base.css v1.0
+   --------------------------------------------------------------------------
+   只有「规范维护任务」可以修改本文件。
+   模块任务：只准「使用」这里提供的通用类，禁止在这里新增样式、禁止覆盖。
+   模块自己的样式一律写进 sections/<模块名>.css，
+   且所有选择器必须以该模块的 tt-xxx- 前缀开头（见 MODULES.md）。
+   ========================================================================== */
+
+/* ---------- 基础重置（唯一允许出现全局选择器的地方） ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--bg);
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+/* 页面极淡网格纹理，与 v1 参考稿一致 */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(var(--bg-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+}
+button, input, select, textarea { font-family: inherit; color: inherit; }
+button { cursor: pointer; border: 0; background: none; }
+a { color: inherit; text-decoration: none; }
+svg { display: block; }
+img { display: block; max-width: 100%; }
+h1, h2, h3, h4, p { margin: 0; }
+
+/* ---------- 布局容器 ---------- */
+.tt-wrap {
+  max-width: var(--wrap-w);
+  margin: 0 auto;
+  padding: var(--sp-5) var(--wrap-pad) 150px;
+  position: relative;
+  z-index: var(--z-base);
+}
+.tt-row  { display: flex; align-items: center; }
+.tt-col  { display: flex; flex-direction: column; }
+.tt-spacer { flex: 1; }
+
+/* ---------- 区块标题（蓝色竖条 + 标题 + 右侧「查看更多」） ---------- */
+.tt-section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--sp-4); }
+.tt-section-head h2 {
+  display: flex; align-items: center; gap: var(--sp-2);
+  font-size: var(--fs-h2); font-weight: 700; color: var(--ink);
+}
+.tt-section-head h2::before {
+  content: ""; width: 3px; height: 17px; border-radius: 3px; background: var(--brand);
+}
+.tt-more { font-size: var(--fs-sm); color: var(--muted); display: flex; align-items: center; gap: 3px; }
+.tt-more:hover { color: var(--brand); }
+
+/* ---------- 卡片 ---------- */
+.tt-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+}
+.tt-card-hover { transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease); }
+.tt-card-hover:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+
+/* ---------- 按钮 ---------- */
+.tt-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 38px; padding: 0 var(--sp-5);
+  border-radius: var(--r-pill);
+  background: var(--brand); color: var(--on-brand);
+  font-size: var(--fs-md); font-weight: 600;
+  box-shadow: 0 4px 12px rgba(47,107,255,.25);
+  transition: background var(--dur);
+}
+.tt-btn:hover { background: var(--brand-deep); }
+.tt-btn-ghost {
+  background: var(--card); color: var(--brand);
+  border: 1px solid var(--brand-border); box-shadow: none;
+}
+.tt-btn-ghost:hover { background: var(--brand-soft); }
+.tt-pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: var(--fs-sm); font-weight: 600;
+  color: var(--brand); background: var(--brand-soft);
+  padding: 5px var(--sp-3); border-radius: var(--r-pill);
+  white-space: nowrap; transition: background var(--dur);
+}
+.tt-pill:hover { background: var(--brand-soft-2); }
+.tt-pill-done { color: var(--success); background: var(--success-bg); }
+
+/* ---------- 标签 / 徽标 ---------- */
+.tt-tag {
+  font-size: var(--fs-sm); padding: 3px 10px; border-radius: var(--r-pill);
+  background: var(--info-bg); color: var(--info); font-weight: 600;
+}
+.tt-tag-ok   { background: var(--success-bg); color: var(--success); }
+.tt-tag-warn { background: var(--warning-bg); color: var(--warning); }
+
+/* ---------- 胶囊输入框 / 搜索框 ---------- */
+.tt-search {
+  height: var(--search-h); border-radius: var(--r-pill);
+  background: var(--card); border: 1px solid var(--line);
+  display: flex; align-items: center; gap: var(--sp-2);
+  padding: 0 var(--sp-4); box-shadow: var(--shadow-sm);
+  transition: border-color var(--dur), box-shadow var(--dur);
+}
+.tt-search:focus-within { border-color: var(--brand-border); box-shadow: 0 0 0 3px rgba(47,107,255,.09); }
+.tt-search input { flex: 1; border: 0; outline: none; background: transparent; font-size: var(--fs-md); }
+.tt-search input::placeholder { color: var(--muted-2); }
+
+/* ---------- 图片槽位基础类（配合 media.css 使用） ---------- */
+.tt-media {
+  background-color: var(--card-soft);
+  background-image: var(--img-placeholder);
+  background-position: center; background-size: cover; background-repeat: no-repeat;
+  position: relative; overflow: hidden;
+}
+
+/* ---------- 空状态 / 提示 ---------- */
+.tt-empty {
+  text-align: center; padding: 46px 0;
+  font-size: var(--fs-md); color: var(--muted);
+  background: var(--card); border: 1px dashed var(--line); border-radius: var(--r-md);
+}
+.tt-note { font-size: var(--fs-sm); color: var(--muted); line-height: 1.7; }
+
+/* ---------- 文本工具 ---------- */
+.tt-muted   { color: var(--muted); }
+.tt-ink-2   { color: var(--ink-2); }
+.tt-ellipsis{ white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tt-clamp-2 {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---------- 栅格（基础定义必须放在响应式之前） ---------- */
+.tt-grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--gap-grid); }
+.tt-grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: var(--gap-grid); }
+
+/* ---------- 统一响应式（模块任务不要自己写媒体查询数值） ---------- */
+@media (max-width: 1024px){
+  .tt-wrap { padding-left: var(--sp-4); padding-right: var(--sp-4); }
+  .tt-grid-4 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 768px){
+  .tt-wrap { padding: var(--sp-4) var(--sp-3) 120px; }
+  .tt-grid-3, .tt-grid-4 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .tt-section-head h2 { font-size: var(--fs-lg); }
+  /* 工具类需要能覆盖模块的 display，此处 !important 仅限规范层 */
+  .tt-hide-sm { display: none !important; }
+}

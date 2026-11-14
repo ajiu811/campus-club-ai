@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240">
+  <rect width="400" height="240" fill="#f8faff"/>
+  <rect x="8" y="8" width="384" height="224" rx="16" fill="none" stroke="#cbdcff" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="200" y="116" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#8490a5">图片待接入</text>
+  <text x="200" y="144" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#aab4c5">在 assets/media.css 里换掉对应槽位即可</text>
+</svg>
