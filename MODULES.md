@@ -118,7 +118,7 @@
    ```html
    <!DOCTYPE html><html lang="zh-CN"><head>
      <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-     <title>团团 · 高校社团智管通</title>
+     <title>社团一站通｜社团广场</title>
      <link rel="stylesheet" href="assets/tokens.css">
      <link rel="stylesheet" href="assets/base.css">
      <link rel="stylesheet" href="assets/media.css">
